@@ -1,0 +1,12 @@
+{
+  "id": "mig_cmdb59br4o6tfr2n407g",
+  "parentID": "mig_cmdb4f2tqco05cv5ou50",
+  "checksum": "1:5888b41ad6ac7f9086dec1137f858a8211339b571bc12801afbcd8a6596e086a",
+  "operations": [
+    {
+      "addTable": {
+        "table": "handles"
+      }
+    }
+  ]
+}

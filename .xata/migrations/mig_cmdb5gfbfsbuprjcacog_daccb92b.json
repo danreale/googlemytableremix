@@ -1,0 +1,19 @@
+{
+  "id": "mig_cmdb5gfbfsbuprjcacog",
+  "parentID": "mig_cmdb59br4o6tfr2n407g",
+  "checksum": "1:daccb92bad07e3b85554e6cd0700b32bc3dc70c813ab6324a98d8e06eb8e83d8",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "player_id",
+          "type": "link",
+          "link": {
+            "table": "players"
+          }
+        },
+        "table": "handles"
+      }
+    }
+  ]
+}

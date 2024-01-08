@@ -1,0 +1,13 @@
+{
+  "id": "mig_cmdb5kvbfsbuprjcacpg",
+  "parentID": "mig_cmdb5gfbfsbuprjcacog",
+  "checksum": "1:06c25f24ad6e6be0b6b26e7171de470b8762d954fbcf642f0c8ae2a5afa4ff48",
+  "operations": [
+    {
+      "removeColumn": {
+        "column": "player_id",
+        "table": "handles"
+      }
+    }
+  ]
+}

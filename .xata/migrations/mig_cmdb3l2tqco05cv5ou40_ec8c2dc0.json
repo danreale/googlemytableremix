@@ -1,0 +1,11 @@
+{
+  "id": "mig_cmdb3l2tqco05cv5ou40",
+  "checksum": "1:ec8c2dc03d118931d887a7a340f94ec50c1d1e51b1f42657baf0979db0b92716",
+  "operations": [
+    {
+      "addTable": {
+        "table": "players"
+      }
+    }
+  ]
+}

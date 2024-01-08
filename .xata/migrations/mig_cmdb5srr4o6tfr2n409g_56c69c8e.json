@@ -1,0 +1,16 @@
+{
+  "id": "mig_cmdb5srr4o6tfr2n409g",
+  "parentID": "mig_cmdb5qjr4o6tfr2n408g",
+  "checksum": "1:56c69c8e0140022a1230b27690c73d3d81ae289be80a10dc806b930ef216f428",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "handle",
+          "type": "string"
+        },
+        "table": "handles"
+      }
+    }
+  ]
+}

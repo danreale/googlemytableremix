@@ -1,5 +1,6 @@
 import { prisma } from "./db.server";
 import { json } from "@remix-run/node";
+import { getXataClient } from "src/xata.ts";
 
 export interface PLAYER {
   firstName: string;
@@ -62,5 +63,39 @@ export async function deletePlayer(id: any) {
     return player;
   } catch (error) {
     throw new Error("Failed to delete player");
+  }
+}
+
+export async function getPlayersV2() {
+  try {
+    const players = await getXataClient().db.players.getAll();
+    return players;
+  } catch (error) {
+    throw new Error("Cant get players");
+  }
+}
+export async function getPlayersCountV2() {
+  try {
+    const players = await getXataClient().db.players.aggregate({
+      totalCount: {
+        count: "*",
+      },
+    });
+    return players;
+  } catch (error) {
+    throw new Error("Cant get player count");
+  }
+}
+
+export async function getHandlesV2() {
+  try {
+    const handles = await getXataClient()
+      .db.handles.filter({
+        playerId: "rec_cme6jvrjkemt2s8ddmjg",
+      })
+      .getAll();
+    return handles;
+  } catch (error) {
+    throw new Error("Cant get player handles");
   }
 }

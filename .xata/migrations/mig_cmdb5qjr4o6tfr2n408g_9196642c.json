@@ -1,0 +1,16 @@
+{
+  "id": "mig_cmdb5qjr4o6tfr2n408g",
+  "parentID": "mig_cmdb5kvbfsbuprjcacpg",
+  "checksum": "1:9196642c434702aa620dd34b87cd28a4452353488bf2e951000d32b6a2970086",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "site",
+          "type": "string"
+        },
+        "table": "handles"
+      }
+    }
+  ]
+}
