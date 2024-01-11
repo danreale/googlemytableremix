@@ -1,18 +1,16 @@
-
 import { Form, useActionData, useNavigation } from "@remix-run/react";
 import { redirect, type ActionFunctionArgs } from "@remix-run/node";
-import { PLAYER, addPlayer } from "~/data/googlemytable.server";
-
+import { PLAYER, addPlayer, addPlayerV2 } from "~/data/googlemytable.server";
 
 export default function Example() {
-    const actionData = useActionData<typeof action>();
-    const transition = useNavigation();
-    const buttonText =
-      transition.state === "submitting"
-        ? "Saving..."
-        : transition.state === "loading"
-        ? "Saved!"
-        : "Add";
+  const actionData = useActionData<typeof action>();
+  const transition = useNavigation();
+  const buttonText =
+    transition.state === "submitting"
+      ? "Saving..."
+      : transition.state === "loading"
+      ? "Saved!"
+      : "Add";
   return (
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -107,26 +105,28 @@ export default function Example() {
   );
 }
 export async function action({ request }: ActionFunctionArgs) {
-    const formData = await request.formData();
-    const playerData = Object.fromEntries(formData);
-    console.log(playerData)
-    if (playerData.firstName.toString().length === 0) {
-      return "Did not enter a valid First Name";
-    }
-    if (playerData.lastName.toString().length === 0) {
-        return "Did not enter a valid Last Name";
-      }
-  
-    try {
-      const newPlayer: PLAYER = {
-        firstName: playerData.firstName.toString(),
-        lastName: playerData.lastName.toString(),
-        professional: playerData.professional?.toString() === "on" ? true : false
-      };
-  
-      await addPlayer(newPlayer);
-      return redirect("/");
-    } catch (error) {
-      throw new Error("Cant add Player");
-    }
+  const formData = await request.formData();
+  const playerData = Object.fromEntries(formData);
+  console.log(playerData);
+  if (playerData.firstName.toString().length === 0) {
+    return "Did not enter a valid First Name";
   }
+  if (playerData.lastName.toString().length === 0) {
+    return "Did not enter a valid Last Name";
+  }
+
+  try {
+    const newPlayer: PLAYER = {
+      first_name: playerData.firstName.toString(),
+      last_name: playerData.lastName.toString(),
+      professional: playerData.professional?.toString() === "on" ? true : false,
+    };
+    console.log(newPlayer);
+
+    // await addPlayer(newPlayer);
+    await addPlayerV2(newPlayer);
+    return redirect("/");
+  } catch (error) {
+    return "Cant Add Player";
+  }
+}

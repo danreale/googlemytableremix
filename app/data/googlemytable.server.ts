@@ -1,10 +1,10 @@
 import { prisma } from "./db.server";
 import { json } from "@remix-run/node";
-import { getXataClient } from "src/xata.ts";
+import { getXataClient } from "src/xata";
 
 export interface PLAYER {
-  firstName: string;
-  lastName: string;
+  first_name: string;
+  last_name: string;
   professional: boolean;
 }
 
@@ -98,4 +98,20 @@ export async function getHandlesV2() {
   } catch (error) {
     throw new Error("Cant get player handles");
   }
+}
+
+export async function deletePlayerV2(id: string) {
+  await getXataClient().db.players.delete({ id: id });
+}
+export async function addPlayerV2(playerData: PLAYER) {
+  await getXataClient().db.players.create(playerData);
+}
+
+export async function getPlayerById(id: string) {
+  const player = await getXataClient().db.players.read(id);
+  return player;
+}
+
+export async function updatePlayerV2(id: string, playerData: PLAYER) {
+  await getXataClient().db.players.update(id, playerData);
 }
