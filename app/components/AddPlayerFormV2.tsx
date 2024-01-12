@@ -1,6 +1,7 @@
 import { Form } from "@remix-run/react";
 import FormTextField from "./FormTextField";
 import SubmitButton from "./SubmitButton";
+import { pokerSites } from "~/data/pokerSites";
 
 export default function AddPlayerForm() {
   return (
@@ -9,7 +10,6 @@ export default function AddPlayerForm() {
         <Form className="space-y-6" method="POST">
           <FormTextField label="First Name" id="first_name" required />
           <FormTextField label="Last Name" id="last_name" required />
-
           <div>
             <div className="flex items-center justify-between">
               <label
@@ -30,17 +30,9 @@ export default function AddPlayerForm() {
             </div>
           </div>
 
-          <FormTextField label="WSOP" id="site_wsop" />
-          <FormTextField label="Americas Card Room (ACR)" id="site_acr" />
-          <FormTextField label="Party Poker" id="site_party_poker" />
-          <FormTextField label="GG Poker" id="site_gg_poker" />
-          <FormTextField label="888" id="site_888" />
-          <FormTextField label="Poker Stars" id="site_poker_stars" />
-          <FormTextField label="Borgata" id="site_borgata" />
-          <FormTextField label="Bet MGM" id="site_bet_mgm" />
-          <FormTextField label="Pala" id="site_pala" />
-          <FormTextField label="WPT Global" id="site_wpt_global" />
-
+          {pokerSites.map((site: any, index: number) => (
+            <FormTextField label={site.label} id={site.id} key={index} />
+          ))}
           <SubmitButton
             defaultText="Add"
             submittingText="Saving..."

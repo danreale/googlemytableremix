@@ -1,4 +1,4 @@
-import { FaCheck, FaTrash } from "react-icons/fa/index.js";
+import { FaCheck, FaPencilAlt, FaTrash } from "react-icons/fa/index.js";
 import { Link, useFetcher } from "@remix-run/react";
 
 export default function PlayersList({ players }: { players: any }) {
@@ -37,11 +37,15 @@ export default function PlayersList({ players }: { players: any }) {
               data-testid="playersRow"
             >
               <label htmlFor="" data-testid="player" className="flex">
-                <Link to={`/players/${player.id}/edit`}>
+                <Link to={`/players/${player.id}/details`}>
                   {player.first_name} {player.last_name}
                 </Link>
               </label>
-              {player.professional && <FaCheck className="text-green-600" />}
+              <button className="text-red-500" data-testid="deleteKeyword">
+                <Link to={`/players/${player.id}/edit`}>
+                  <FaPencilAlt className="text-orange-400" />
+                </Link>
+              </button>
               <button
                 className="text-red-500"
                 onClick={() => deleteItemHandler(player.id)}

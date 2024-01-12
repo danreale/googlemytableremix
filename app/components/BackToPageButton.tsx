@@ -8,7 +8,7 @@ export default function BackToPageButton({ text }: { text: string }) {
     <>
       <div className="flex justify-center">
         <button onClick={goBack} className="flex justify-center items-center">
-          <FaArrowCircleLeft className=" text-green-700" />
+          <FaArrowCircleLeft className=" text-green-700 mr-1" />
           {text}
         </button>
       </div>

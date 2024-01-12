@@ -1,6 +1,7 @@
 import { Form } from "@remix-run/react";
 import FormTextField from "./FormTextField";
 import SubmitButton from "./SubmitButton";
+import { pokerSites } from "~/data/pokerSites";
 
 export default function EditPlayerForm({ player }: { player: any }) {
   return (
@@ -41,56 +42,14 @@ export default function EditPlayerForm({ player }: { player: any }) {
             </div>
           </div>
 
-          <FormTextField
-            label="WSOP"
-            id="site_wsop"
-            defaultValue={player.site_wsop}
-          />
-          <FormTextField
-            label="Americas Card Room (ACR)"
-            id="site_acr"
-            defaultValue={player.site_acr}
-          />
-          <FormTextField
-            label="Party Poker"
-            id="site_party_poker"
-            defaultValue={player.site_party_poker}
-          />
-          <FormTextField
-            label="GG Poker"
-            id="site_gg_poker"
-            defaultValue={player.site_gg_poker}
-          />
-          <FormTextField
-            label="888"
-            id="site_888"
-            defaultValue={player.site_888}
-          />
-          <FormTextField
-            label="Poker Stars"
-            id="site_poker_stars"
-            defaultValue={player.site_poker_stars}
-          />
-          <FormTextField
-            label="Borgata"
-            id="site_borgata"
-            defaultValue={player.site_borgata}
-          />
-          <FormTextField
-            label="Bet MGM"
-            id="site_bet_mgm"
-            defaultValue={player.site_mgm}
-          />
-          <FormTextField
-            label="Pala"
-            id="site_pala"
-            defaultValue={player.site_pala}
-          />
-          <FormTextField
-            label="WPT Global"
-            id="site_wpt_global"
-            defaultValue={player.site_wpt_global}
-          />
+          {pokerSites.map((site: any, index: number) => (
+            <FormTextField
+              label={site.label}
+              id={site.id}
+              defaultValue={player[site.id]}
+              key={index}
+            />
+          ))}
 
           <SubmitButton
             defaultText="Update"

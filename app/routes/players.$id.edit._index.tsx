@@ -3,8 +3,7 @@ import {
   LoaderFunctionArgs,
   redirect,
 } from "@remix-run/node";
-import { Link, useLoaderData, useParams } from "@remix-run/react";
-import { FaIdCard } from "react-icons/fa/index.js";
+import { useLoaderData, useParams } from "@remix-run/react";
 import BackToPageButton from "~/components/BackToPageButton";
 import EditPlayerFormV2 from "~/components/EditPlayerFormV2";
 import {

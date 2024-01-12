@@ -1,7 +1,6 @@
 import { useActionData } from "@remix-run/react";
 import { redirect, type ActionFunctionArgs } from "@remix-run/node";
-import { PLAYER, addPlayerV2, addPlayerV3 } from "~/data/googlemytable.server";
-import AddPlayerForm from "~/components/AddPlayerForm";
+import { PLAYER, addPlayerV3 } from "~/data/googlemytable.server";
 import BackToPageButton from "~/components/BackToPageButton";
 import AddPlayerFormV2 from "~/components/AddPlayerFormV2";
 
