@@ -4,6 +4,7 @@ import {
   redirect,
 } from "@remix-run/node";
 import { useLoaderData, useParams } from "@remix-run/react";
+import BackToPageButton from "~/components/BackToPageButton";
 import EditPlayerHandleForm from "~/components/EditPlayerHandleForm";
 import {
   HANDLE,
@@ -16,8 +17,15 @@ export default function EditHandle() {
   const params = useParams();
   return (
     <>
-      <h1>Edit Player Handle Page</h1>
-      <EditPlayerHandleForm handle={handle} />
+      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-5 lg:px-8">
+        <BackToPageButton text="Back To Player Handles" />
+        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+            Edit Player Handle
+          </h2>
+        </div>
+        <EditPlayerHandleForm handle={handle} />
+      </div>
     </>
   );
 }

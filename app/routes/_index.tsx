@@ -11,7 +11,7 @@ import {
   type ActionFunctionArgs,
   redirect,
 } from "@remix-run/node";
-import { FaCheck, FaTrash, FaUserPlus } from "react-icons/fa/index.js";
+import { FaCheck, FaCrown, FaTrash, FaUserPlus } from "react-icons/fa/index.js";
 import {
   deletePlayer,
   deletePlayerV2,
@@ -22,6 +22,7 @@ import {
   type PLAYERROW,
 } from "~/data/googlemytable.server";
 import PlayersList from "~/components/PlayersList";
+import NavigationHeader from "~/components/Header";
 
 export function headers({
   loaderHeaders,
@@ -48,36 +49,10 @@ export default function Index() {
 
   return (
     <main style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }}>
-      <h1>Welcome to Remix</h1>
-      <ul>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/blog"
-            rel="noreferrer noopener"
-          >
-            15m Quickstart Blog Tutorial
-          </a>
-        </li>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/jokes"
-            rel="noreferrer noopener"
-          >
-            Deep Dive Jokes App Tutorial
-          </a>
-        </li>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/docs"
-            rel="noreferrer noopener"
-          >
-            Remix Docs
-          </a>
-        </li>
-      </ul>
+      {/* <Link to="/">
+        <FaCrown className="mx-auto h-10 w-auto text-green-700" />
+      </Link> */}
+      <NavigationHeader />
       <h1 className="text-2xl text-center py-2">Players</h1>
       <div className="flex justify-center items-center text-center text-xl space-x-1 py-5">
         <p>Players Count:</p>

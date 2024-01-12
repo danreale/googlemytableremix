@@ -5,6 +5,7 @@ import {
 } from "@remix-run/node";
 import { Link, useLoaderData, useParams } from "@remix-run/react";
 import { FaIdCard } from "react-icons/fa/index.js";
+import BackToPageButton from "~/components/BackToPageButton";
 import EditPlayerForm from "~/components/EditPlayerForm";
 import {
   PLAYER,
@@ -17,17 +18,24 @@ export default function EditPlayer() {
   const params = useParams();
   return (
     <>
-      <h1>Edit Player</h1>
-      <EditPlayerForm player={player} />
-      <div className="py-5 flex justify-center text-center space-x-1">
-        <Link
-          to={`/players/${params.id}/handles`}
-          className=" underline text-blue-700"
-        >
-          Player Handles
-        </Link>
+      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-5 lg:px-8">
+        <BackToPageButton text="Back To Player Search" />
+        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+            Edit Player
+          </h2>
+        </div>
+        <EditPlayerForm player={player} />
+        <div className="py-5 flex justify-center text-center space-x-1">
+          <Link
+            to={`/players/${params.id}/handles`}
+            className=" underline text-blue-700"
+          >
+            Player Handles
+          </Link>
 
-        <FaIdCard className="text-blue-700" />
+          <FaIdCard className="text-blue-700" />
+        </div>
       </div>
     </>
   );
