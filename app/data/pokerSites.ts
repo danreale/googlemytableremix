@@ -35,6 +35,10 @@ export const pokerSites: Array<POKERSITE> = [
     label: "WPT Global",
     id: "site_wpt_global",
   },
+  {
+    label: "GG Poker",
+    id: "site_gg_poker",
+  },
 ];
 
 export interface POKERSITE {

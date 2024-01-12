@@ -75,11 +75,12 @@ export async function updatePlayerV2(id: string, playerData: PLAYER) {
   await getXataClient().db.players.update(id, playerData);
 }
 
-export async function searchPlayersByNameV2(searchTerm: string) {
-  const playerData = await getXataClient().search.all(searchTerm, {
-    tables: ["players"],
-    fuzziness: 2,
-  });
+export async function searchPlayersByNameV2(site: string, handle: string) {
+  const playerData = await getXataClient()
+    .db.players.filter({
+      [site]: handle,
+    })
+    .getMany();
   return playerData;
 }
 

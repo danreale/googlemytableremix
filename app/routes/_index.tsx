@@ -10,14 +10,16 @@ import {
   type ActionFunctionArgs,
   redirect,
 } from "@remix-run/node";
-import { FaUserPlus } from "react-icons/fa/index.js";
+import { FaFrown, FaUserPlus } from "react-icons/fa/index.js";
 import {
   deletePlayerV2,
   getPlayersCountV2,
   getPlayersV2,
+  searchPlayersByNameV2,
 } from "~/data/googlemytable.server";
 import PlayersList from "~/components/PlayersList";
 import NavigationHeader from "~/components/Header";
+import { POKERSITE, pokerSites } from "~/data/pokerSites";
 
 export default function Index() {
   const actionData = useActionData<typeof action>();
@@ -36,6 +38,31 @@ export default function Index() {
       </div>
       <div className="flex justify-center items-center text-center pt-2">
         <Form>
+          <div className="flex items-center justify-center">
+            <label
+              htmlFor="site"
+              className="block text-sm font-medium leading-6 text-gray-900"
+            >
+              Choose Site
+            </label>
+          </div>
+          <div className="mt-2 pb-5">
+            <select
+              id="site"
+              name="site"
+              className="border-2 border-green-700 rounded text-center w-80"
+              required
+            >
+              {pokerSites.map((site: POKERSITE, index: number) => {
+                return (
+                  <option key={index} value={site.id}>
+                    {site.label}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+
           <input
             type="text"
             name="query"
@@ -59,6 +86,16 @@ export default function Index() {
         </div>
 
         {!playersCountZero && <PlayersList players={players} />}
+        {players.length === 0 && (
+          <p className="text-2xl text-center py-2 flex justify-center items-center">
+            <Link
+              to="/players/add"
+              className="flex justify-center items-center"
+            >
+              No Players Found <FaFrown className="text-green-700" />
+            </Link>
+          </p>
+        )}
       </div>
       <div>
         <p>{actionData}</p>
@@ -76,8 +113,17 @@ export async function loader({ request }: LoaderFunctionArgs) {
   const playerCount = await getPlayersCountV2();
   console.log(playerCount);
 
-  const players = await getPlayersV2();
-  console.log(players);
+  let players;
+  if (!search.get("query")) {
+    players = await getPlayersV2();
+    console.log(players);
+  } else {
+    players = await searchPlayersByNameV2(
+      search.get("site"),
+      search.get("query")
+    );
+    // console.log("Practice Search", practiceSearch);
+  }
 
   // const fakeSearch = await searchPlayersByHandleV2(search.get("query"));
   // console.log(`Fake Search`, fakeSearch);

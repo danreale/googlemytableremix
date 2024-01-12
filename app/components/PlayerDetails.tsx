@@ -6,6 +6,17 @@ export default function PlayerDetails({ player }: { player: any }) {
       <h1 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900 py-5">
         {player.first_name} {player.last_name}
       </h1>
+      {player.professional && (
+        <h2 className="flex justify-center text-center text-2xl pb-5">
+          Professional
+        </h2>
+      )}
+      {!player.professional && (
+        <h2 className="flex justify-center text-center text-2xl pb-5">
+          Recreational Player
+        </h2>
+      )}
+
       <ul className="space-y-2">
         {pokerSites.map(
           (site: POKERSITE, index: number) =>

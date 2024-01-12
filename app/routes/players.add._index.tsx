@@ -4,7 +4,7 @@ import { PLAYER, addPlayerV3 } from "~/data/googlemytable.server";
 import BackToPageButton from "~/components/BackToPageButton";
 import AddPlayerFormV2 from "~/components/AddPlayerFormV2";
 
-export default function Example() {
+export default function AddPlayer() {
   const actionData = useActionData<typeof action>();
   return (
     <>
@@ -28,12 +28,12 @@ export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData();
   const playerData = Object.fromEntries(formData);
   console.log(playerData);
-  if (playerData.first_name.toString().length === 0) {
-    return "Did not enter a valid First Name";
-  }
-  if (playerData.last_name.toString().length === 0) {
-    return "Did not enter a valid Last Name";
-  }
+  // if (playerData.first_name.toString().length === 0) {
+  //   return "Did not enter a valid First Name";
+  // }
+  // if (playerData.last_name.toString().length === 0) {
+  //   return "Did not enter a valid Last Name";
+  // }
 
   try {
     const newPlayer: PLAYER = {
