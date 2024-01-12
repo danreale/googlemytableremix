@@ -1,9 +1,18 @@
 import { Form, useActionData, useNavigation } from "@remix-run/react";
-import { redirect, type ActionFunctionArgs } from "@remix-run/node";
-import { PLAYER, addPlayer } from "~/data/googlemytable.server";
+import {
+  redirect,
+  type ActionFunctionArgs,
+  LoaderFunctionArgs,
+} from "@remix-run/node";
+import {
+  HANDLE,
+  PLAYER,
+  addPlayer,
+  addPlayerHandleV2,
+} from "~/data/googlemytable.server";
 import { pokerSites } from "~/data/pokerSites";
 
-export default function Example() {
+export default function AddHandle() {
   const actionData = useActionData<typeof action>();
   const transition = useNavigation();
   const buttonText =
@@ -91,24 +100,26 @@ export default function Example() {
     </>
   );
 }
-export async function action({ request }: ActionFunctionArgs) {
+
+export async function action({ request, params }: ActionFunctionArgs) {
+  const playerId = params.id;
   const formData = await request.formData();
-  const playerData = Object.fromEntries(formData);
-  console.log(playerData);
-  if (playerData.handle.toString().length === 0) {
+  const handleData = Object.fromEntries(formData);
+  console.log(handleData);
+  if (handleData.handle.toString().length === 0) {
     return "Did not enter a valid player Handle";
   }
 
   try {
-    const newPlayer: PLAYER = {
-      firstName: playerData.firstName.toString(),
-      lastName: playerData.lastName.toString(),
-      professional: playerData.professional?.toString() === "on" ? true : false,
+    const playerHandle: HANDLE = {
+      site: handleData.site.toString(),
+      handle: handleData.handle.toString(),
+      playerId: playerId!!,
     };
 
-    await addPlayer(newPlayer);
-    return redirect("/");
+    await addPlayerHandleV2(playerHandle);
+    return redirect(`/players/${playerId}/handles`);
   } catch (error) {
-    throw new Error("Cant add Player");
+    throw new Error("Cant add player handle");
   }
 }

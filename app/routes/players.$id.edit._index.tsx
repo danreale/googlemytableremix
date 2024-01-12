@@ -3,7 +3,8 @@ import {
   LoaderFunctionArgs,
   redirect,
 } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { Link, useLoaderData, useParams } from "@remix-run/react";
+import { FaIdCard } from "react-icons/fa/index.js";
 import EditPlayerForm from "~/components/EditPlayerForm";
 import {
   PLAYER,
@@ -13,10 +14,21 @@ import {
 
 export default function EditPlayer() {
   const player = useLoaderData<typeof loader>();
+  const params = useParams();
   return (
     <>
       <h1>Edit Player</h1>
       <EditPlayerForm player={player} />
+      <div className="py-5 flex justify-center text-center space-x-1">
+        <Link
+          to={`/players/${params.id}/handles`}
+          className=" underline text-blue-700"
+        >
+          Player Handles
+        </Link>
+
+        <FaIdCard className="text-blue-700" />
+      </div>
     </>
   );
 }

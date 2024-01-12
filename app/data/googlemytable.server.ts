@@ -15,6 +15,18 @@ export interface PLAYERROW {
   professional: boolean;
 }
 
+export interface HANDLE {
+  site: string;
+  handle: string;
+  playerId: string;
+}
+export interface HANDLEROW {
+  site: string;
+  handle: string;
+  playerId: string;
+  id: string;
+}
+
 export async function addPlayer(playerData: PLAYER) {
   const playerExists = await prisma.players.findFirst({
     where: { firstName: playerData.firstName, lastName: playerData.lastName },
@@ -87,11 +99,11 @@ export async function getPlayersCountV2() {
   }
 }
 
-export async function getHandlesV2() {
+export async function getHandlesV2(playerId: string) {
   try {
     const handles = await getXataClient()
       .db.handles.filter({
-        playerId: "rec_cme6jvrjkemt2s8ddmjg",
+        playerId: playerId,
       })
       .getAll();
     return handles;
@@ -114,4 +126,18 @@ export async function getPlayerById(id: string) {
 
 export async function updatePlayerV2(id: string, playerData: PLAYER) {
   await getXataClient().db.players.update(id, playerData);
+}
+
+export async function addPlayerHandleV2(handle: HANDLE) {
+  await getXataClient().db.handles.create(handle);
+}
+export async function deletePlayerHandleV2(id: string) {
+  await getXataClient().db.handles.delete({ id: id });
+}
+export async function getPlayerHandleById(id: string) {
+  const handle = await getXataClient().db.handles.read(id);
+  return handle;
+}
+export async function updateHandleV2(id: string, handleData: HANDLE) {
+  await getXataClient().db.handles.update(id, handleData);
 }

@@ -11,7 +11,7 @@ import {
   type ActionFunctionArgs,
   redirect,
 } from "@remix-run/node";
-import { FaCheck, FaTrash } from "react-icons/fa/index.js";
+import { FaCheck, FaTrash, FaUserPlus } from "react-icons/fa/index.js";
 import {
   deletePlayer,
   deletePlayerV2,
@@ -104,12 +104,13 @@ export default function Index() {
             <Link to="/players/add">Add Some Players Today!</Link>
           </p>
         )}
-        <Link
-          to="/players/add"
-          className="py-5 flex justify-center underline text-blue-700"
-        >
-          Add Player
-        </Link>
+        <div className="py-5 flex justify-center text-center space-x-1">
+          <Link to="/players/add" className=" underline text-blue-700">
+            Add Player
+          </Link>
+          <FaUserPlus className="text-blue-700" />
+        </div>
+
         {!playersCountZero && <PlayersList players={players} />}
       </div>
       <div>
