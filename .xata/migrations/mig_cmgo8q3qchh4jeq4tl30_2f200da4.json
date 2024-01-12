@@ -1,0 +1,16 @@
+{
+  "id": "mig_cmgo8q3qchh4jeq4tl30",
+  "parentID": "mig_cmgo8orvv9jpetvg2oc0",
+  "checksum": "1:2f200da407473c60a6312639d2f3f8529deeb94838ad40385f1246368e9f9dd1",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "site_pala",
+          "type": "string"
+        },
+        "table": "players"
+      }
+    }
+  ]
+}

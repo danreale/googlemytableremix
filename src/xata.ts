@@ -13,15 +13,16 @@ const tables = [
       { name: "first_name", type: "string" },
       { name: "last_name", type: "string" },
       { name: "professional", type: "bool" },
-    ],
-    revLinks: [{ column: "playerId", table: "handles" }],
-  },
-  {
-    name: "handles",
-    columns: [
-      { name: "site", type: "string" },
-      { name: "handle", type: "string" },
-      { name: "playerId", type: "link", link: { table: "players" } },
+      { name: "site_wsop", type: "string" },
+      { name: "site_acr", type: "string" },
+      { name: "site_party_poker", type: "string" },
+      { name: "site_gg_poker", type: "string" },
+      { name: "site_888", type: "string" },
+      { name: "site_poker_stars", type: "string" },
+      { name: "site_borgata", type: "string" },
+      { name: "site_bet_mgm", type: "string" },
+      { name: "site_pala", type: "string" },
+      { name: "site_wpt_global", type: "string" },
     ],
   },
 ] as const;
@@ -32,12 +33,8 @@ export type InferredTypes = SchemaInference<SchemaTables>;
 export type Players = InferredTypes["players"];
 export type PlayersRecord = Players & XataRecord;
 
-export type Handles = InferredTypes["handles"];
-export type HandlesRecord = Handles & XataRecord;
-
 export type DatabaseSchema = {
   players: PlayersRecord;
-  handles: HandlesRecord;
 };
 
 const DatabaseClient = buildClient();

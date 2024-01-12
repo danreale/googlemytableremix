@@ -1,0 +1,16 @@
+{
+  "id": "mig_cmgo7m3vv9jpetvg2oa0",
+  "parentID": "mig_cmgo7gbvv9jpetvg2o90",
+  "checksum": "1:e838be8f0a47136bc0496fe8a114a24a8007845e643f1e7d1e66b7639587ddba",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "professional",
+          "type": "bool"
+        },
+        "table": "players"
+      }
+    }
+  ]
+}

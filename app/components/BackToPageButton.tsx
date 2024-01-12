@@ -7,7 +7,7 @@ export default function BackToPageButton({ text }: { text: string }) {
   return (
     <>
       <div className="flex justify-center">
-        <button onClick={goBack} className="flex justify-center">
+        <button onClick={goBack} className="flex justify-center items-center">
           <FaArrowCircleLeft className=" text-green-700" />
           {text}
         </button>

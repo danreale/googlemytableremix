@@ -6,11 +6,11 @@ import {
 import { Link, useLoaderData, useParams } from "@remix-run/react";
 import { FaIdCard } from "react-icons/fa/index.js";
 import BackToPageButton from "~/components/BackToPageButton";
-import EditPlayerForm from "~/components/EditPlayerForm";
+import EditPlayerFormV2 from "~/components/EditPlayerFormV2";
 import {
   PLAYER,
   getPlayerById,
-  updatePlayerV2,
+  updatePlayerV3,
 } from "~/data/googlemytable.server";
 
 export default function EditPlayer() {
@@ -25,17 +25,7 @@ export default function EditPlayer() {
             Edit Player
           </h2>
         </div>
-        <EditPlayerForm player={player} />
-        <div className="py-5 flex justify-center text-center space-x-1">
-          <Link
-            to={`/players/${params.id}/handles`}
-            className=" underline text-blue-700"
-          >
-            Player Handles
-          </Link>
-
-          <FaIdCard className="text-blue-700" />
-        </div>
+        <EditPlayerFormV2 player={player} />
       </div>
     </>
   );
@@ -53,23 +43,33 @@ export async function action({ request, params }: ActionFunctionArgs) {
   const formData = await request.formData();
   const playerData = Object.fromEntries(formData);
   console.log(playerData);
-  if (playerData.firstName.toString().length === 0) {
+  if (playerData.first_name.toString().length === 0) {
     return "Did not enter a valid First Name";
   }
-  if (playerData.lastName.toString().length === 0) {
+  if (playerData.last_name.toString().length === 0) {
     return "Did not enter a valid Last Name";
   }
 
   try {
     const newPlayer: PLAYER = {
-      first_name: playerData.firstName.toString(),
-      last_name: playerData.lastName.toString(),
+      first_name: playerData.first_name.toString(),
+      last_name: playerData.last_name.toString(),
       professional: playerData.professional?.toString() === "on" ? true : false,
+      site_wsop: playerData.site_wsop.toString(),
+      site_acr: playerData.site_acr.toString(),
+      site_party_poker: playerData.site_party_poker.toString(),
+      site_gg_poker: playerData.site_gg_poker.toString(),
+      site_888: playerData.site_888.toString(),
+      site_poker_stars: playerData.site_poker_stars.toString(),
+      site_borgata: playerData.site_borgata.toString(),
+      site_bet_mgm: playerData.site_bet_mgm.toString(),
+      site_pala: playerData.site_pala.toString(),
+      site_wpt_global: playerData.site_wpt_global.toString(),
     };
     console.log(newPlayer);
 
     // await addPlayer(newPlayer);
-    await updatePlayerV2(playerId!!, newPlayer);
+    await updatePlayerV3(playerId!!, newPlayer);
     return redirect("/");
   } catch (error) {
     return "Cant Update Player";

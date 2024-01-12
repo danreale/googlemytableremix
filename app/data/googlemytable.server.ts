@@ -6,6 +6,16 @@ export interface PLAYER {
   first_name: string;
   last_name: string;
   professional: boolean;
+  site_wsop: string;
+  site_acr: string;
+  site_party_poker: string;
+  site_gg_poker: string;
+  site_888: string;
+  site_poker_stars: string;
+  site_borgata: string;
+  site_bet_mgm: string;
+  site_pala: string;
+  site_wpt_global: string;
 }
 
 export interface PLAYERROW {
@@ -140,4 +150,26 @@ export async function getPlayerHandleById(id: string) {
 }
 export async function updateHandleV2(id: string, handleData: HANDLE) {
   await getXataClient().db.handles.update(id, handleData);
+}
+
+export async function searchPlayersByNameV2(searchTerm: string) {
+  const playerData = await getXataClient().search.all(searchTerm, {
+    tables: ["players"],
+    fuzziness: 2,
+  });
+  return playerData;
+}
+
+export async function searchPlayersByHandleV2(searchTerm: string) {
+  const playerData = await getXataClient().search.all(searchTerm, {
+    tables: ["handles"],
+    fuzziness: 2,
+  });
+  return playerData;
+}
+export async function addPlayerV3(playerData: PLAYER) {
+  await getXataClient().db.players.create(playerData);
+}
+export async function updatePlayerV3(id: string, playerData: PLAYER) {
+  await getXataClient().db.players.update(id, playerData);
 }

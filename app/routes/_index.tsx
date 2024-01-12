@@ -19,6 +19,7 @@ import {
   getPlayers,
   getPlayersCountV2,
   getPlayersV2,
+  searchPlayersByHandleV2,
   type PLAYERROW,
 } from "~/data/googlemytable.server";
 import PlayersList from "~/components/PlayersList";
@@ -65,11 +66,11 @@ export default function Index() {
           <input
             type="text"
             name="query"
-            placeholder="Search Players..."
+            placeholder="Search Player Handle"
             defaultValue={params.get("query") || ""}
             // onChange={(e) => setSearchTerm(e.target.value)}
-            className="border border-2 border-white rounded"
-            data-testid="keywordSearch"
+            className="border-4 border-blue-500 rounded"
+            data-testid="handleSearch"
           />
         </Form>
       </div>
@@ -97,7 +98,6 @@ export default function Index() {
 export async function loader({ request }: LoaderFunctionArgs) {
   const url = new URL(request.url);
   const search = new URLSearchParams(url.search);
-
   // const playerCount = await getPlayerCount();
 
   // const players = await getPlayers(search.get("query"));
@@ -107,6 +107,10 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
   const players = await getPlayersV2();
   console.log(players);
+
+  // const fakeSearch = await searchPlayersByHandleV2(search.get("query"));
+  // console.log(`Fake Search`, fakeSearch);
+  // console.log(fakeSearch.records);
 
   return { playerCount, players };
 }

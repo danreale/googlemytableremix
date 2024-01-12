@@ -1,0 +1,12 @@
+{
+  "id": "mig_cmgo718mj350nbjo7ku0",
+  "parentID": "mig_cmgo703vv9jpetvg2o70",
+  "checksum": "1:81f4184d9871080e32d0015859845b1df19e180d9a6a36904c7fa7b74ae34cf7",
+  "operations": [
+    {
+      "addTable": {
+        "table": "players"
+      }
+    }
+  ]
+}

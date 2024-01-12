@@ -1,0 +1,16 @@
+{
+  "id": "mig_cmgo883qchh4jeq4tl00",
+  "parentID": "mig_cmgo81rqchh4jeq4tkv0",
+  "checksum": "1:807b8dea37b15a74d2638b325ddf7a791e7f10e8984d9ecd8bc8c64ac33c1272",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "site_acr",
+          "type": "string"
+        },
+        "table": "players"
+      }
+    }
+  ]
+}

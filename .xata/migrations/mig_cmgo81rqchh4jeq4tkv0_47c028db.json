@@ -1,0 +1,16 @@
+{
+  "id": "mig_cmgo81rqchh4jeq4tkv0",
+  "parentID": "mig_cmgo7m3vv9jpetvg2oa0",
+  "checksum": "1:47c028db59311b8bea8588cc5140126899cd157b528b8dd604b143465fc80d51",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "site_wsop",
+          "type": "string"
+        },
+        "table": "players"
+      }
+    }
+  ]
+}

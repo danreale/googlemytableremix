@@ -1,0 +1,16 @@
+{
+  "id": "mig_cmgo8l8mj350nbjo7l00",
+  "parentID": "mig_cmgo8i3qchh4jeq4tl20",
+  "checksum": "1:eae0f9948f80d20c87b0ed0a10f8726e960ec82678aee46811ceab3ab1819d02",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "site_borgata",
+          "type": "string"
+        },
+        "table": "players"
+      }
+    }
+  ]
+}

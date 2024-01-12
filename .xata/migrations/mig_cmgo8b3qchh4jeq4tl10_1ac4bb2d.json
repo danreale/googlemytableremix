@@ -1,0 +1,16 @@
+{
+  "id": "mig_cmgo8b3qchh4jeq4tl10",
+  "parentID": "mig_cmgo883qchh4jeq4tl00",
+  "checksum": "1:1ac4bb2d01a8282597af9cb7d36be3dac6b7eca7ec4de6c84ff4770028266332",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "site_party_poker",
+          "type": "string"
+        },
+        "table": "players"
+      }
+    }
+  ]
+}

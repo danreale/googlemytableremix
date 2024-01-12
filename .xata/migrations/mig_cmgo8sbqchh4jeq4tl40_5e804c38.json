@@ -1,0 +1,16 @@
+{
+  "id": "mig_cmgo8sbqchh4jeq4tl40",
+  "parentID": "mig_cmgo8q3qchh4jeq4tl30",
+  "checksum": "1:5e804c389f0eae9c995b34643cb66aae2cff3274396525f369762c6740f0b141",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "site_wpt_global",
+          "type": "string"
+        },
+        "table": "players"
+      }
+    }
+  ]
+}
