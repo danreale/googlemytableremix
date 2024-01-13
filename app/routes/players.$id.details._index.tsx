@@ -6,7 +6,6 @@ import { getPlayerById } from "~/data/googlemytable.server";
 
 export default function EditPlayer() {
   const player = useLoaderData<typeof loader>();
-  const params = useParams();
   return (
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-5 lg:px-8">

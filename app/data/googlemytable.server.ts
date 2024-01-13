@@ -107,3 +107,11 @@ export async function getPlayersV3() {
   });
   return players;
 }
+
+export function formatName(name: string) {
+  return name.charAt(0).toUpperCase() + name.slice(1);
+}
+
+export function formatHandle(handle: string) {
+  return handle.toUpperCase();
+}

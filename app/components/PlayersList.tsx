@@ -1,4 +1,4 @@
-import { FaCheck, FaPencilAlt, FaTrash } from "react-icons/fa/index.js";
+import { FaPencilAlt, FaTrash } from "react-icons/fa/index.js";
 import { Link, useFetcher } from "@remix-run/react";
 
 export default function PlayersList({ players }: { players: any }) {

@@ -70,3 +70,12 @@ netlify deploy --build
 # production deployment
 netlify deploy --build --prod
 ```
+
+
+### Updating Poker Sites
+To update a site, go into Xata and add the column to the players table. Make sure to have the `site_` prefix before the site name.
+
+run `xata pull main` on you computer before running the app. This pulls in the latest database schema changes
+
+After the column is added to the database, go into `pokerSites.ts` in the data folder and add the site.
+

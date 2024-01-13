@@ -14,10 +14,11 @@ import { FaFrown, FaUserPlus } from "react-icons/fa/index.js";
 import {
   deletePlayerV2,
   getPlayersCountV2,
-  getPlayersV2,
   searchPlayersByNameV2,
   searchPlayersByHandleV2,
   getPlayersV3,
+  formatName,
+  formatHandle,
 } from "~/data/googlemytable.server";
 import PlayersList from "~/components/PlayersList";
 import NavigationHeader from "~/components/Header";
@@ -226,14 +227,14 @@ export async function loader({ request }: LoaderFunctionArgs) {
   let players;
   if (search.get("searchType") === "nameSearch") {
     players = await searchPlayersByNameV2(
-      search.get("first_name"),
-      search.get("last_name")
+      formatName(search.get("first_name")),
+      formatName(search.get("last_name"))
     );
     console.log(players);
   } else if (search.get("searchType") === "handleSearch") {
     players = await searchPlayersByHandleV2(
       search.get("site"),
-      search.get("query")
+      formatHandle(search.get("query"))
     );
     // console.log("Practice Search", practiceSearch);
   } else {
