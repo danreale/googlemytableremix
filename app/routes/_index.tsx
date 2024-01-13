@@ -19,6 +19,7 @@ import {
   getPlayersV3,
   formatName,
   formatHandle,
+  getPlayersProCountV2,
 } from "~/data/googlemytable.server";
 import PlayersList from "~/components/PlayersList";
 import NavigationHeader from "~/components/Header";
@@ -28,7 +29,7 @@ import { useState } from "react";
 export default function Index() {
   const actionData = useActionData<typeof action>();
   const [params] = useSearchParams();
-  const { playerCount, players } = useLoaderData<typeof loader>();
+  const { playerCount, players, proCount } = useLoaderData<typeof loader>();
   const playersCountZero = playerCount.aggs.totalCount === 0 ? true : false;
   const [isOpen, setIsOpen] = useState(true);
   const [toggleText, setToggleText] = useState("Search By Name");
@@ -64,6 +65,14 @@ export default function Index() {
         <p className="text-red-500" data-testid="keywordCount">
           {playerCount.aggs.totalCount}
         </p>
+      </div>
+      <div className="flex justify-center space-x-2">
+        <label className="text-red-500" data-testid="keywordCount">
+          Pro: {proCount.aggs.proCount}
+        </label>
+        <label className="text-red-500" data-testid="keywordCount">
+          Rec: {proCount.aggs.recCount}
+        </label>
       </div>
       <div className="flex justify-center py-5">
         <button
@@ -224,6 +233,8 @@ export async function loader({ request }: LoaderFunctionArgs) {
   const playerCount = await getPlayersCountV2();
   // console.log(playerCount);
 
+  const proCount = await getPlayersProCountV2();
+
   let players;
   if (search.get("searchType") === "nameSearch") {
     players = await searchPlayersByNameV2(
@@ -245,7 +256,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
   // console.log(`Fake Search`, fakeSearch);
   // console.log(fakeSearch.records);
 
-  return { playerCount, players };
+  return { playerCount, players, proCount };
 }
 
 export async function action({ request }: ActionFunctionArgs) {

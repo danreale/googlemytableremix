@@ -58,6 +58,29 @@ export async function getPlayersCountV2() {
     throw new Error("Cant get player count");
   }
 }
+export async function getPlayersProCountV2() {
+  try {
+    const players = await getXataClient().db.players.aggregate({
+      proCount: {
+        count: {
+          filter: {
+            professional: true,
+          },
+        },
+      },
+      recCount: {
+        count: {
+          filter: {
+            professional: false,
+          },
+        },
+      },
+    });
+    return players;
+  } catch (error) {
+    throw new Error("Cant get player count");
+  }
+}
 
 export async function deletePlayerV2(id: string) {
   await getXataClient().db.players.delete({ id: id });
