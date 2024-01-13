@@ -113,7 +113,7 @@ export default function Index() {
                 name="query"
                 placeholder="Search Player Handle"
                 defaultValue={params.get("query") || ""}
-                className="border-4 border-blue-500 rounded"
+                className="border-4 border-blue-500 rounded pl-2"
                 data-testid="handleSearch"
               />
               <div className="py-5">
@@ -150,7 +150,7 @@ export default function Index() {
                   name="first_name"
                   placeholder="Player First Name"
                   defaultValue={params.get("first_name") || ""}
-                  className="border-4 border-blue-500 rounded"
+                  className="border-4 border-blue-500 rounded pl-2"
                   data-testid="first_name_search"
                 />
               </div>
@@ -160,7 +160,7 @@ export default function Index() {
                   name="last_name"
                   placeholder="Player Last Name"
                   defaultValue={params.get("last_name") || ""}
-                  className="border-4 border-blue-500 rounded"
+                  className="border-4 border-blue-500 rounded pl-2"
                   data-testid="last_name_search"
                 />
               </div>
