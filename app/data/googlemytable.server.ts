@@ -78,7 +78,7 @@ export async function updatePlayerV2(id: string, playerData: PLAYER) {
 export async function searchPlayersByHandleV2(site: string, handle: string) {
   const playerData = await getXataClient()
     .db.players.filter({
-      [site]: handle,
+      [site]: { $contains: handle },
     })
     .getMany();
   return playerData;
@@ -89,8 +89,8 @@ export async function searchPlayersByNameV2(
 ) {
   const playerData = await getXataClient()
     .db.players.filter({
-      first_name,
-      last_name,
+      first_name: { $contains: first_name },
+      last_name: { $contains: last_name },
     })
     .getMany();
   return playerData;
