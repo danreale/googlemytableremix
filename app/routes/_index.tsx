@@ -92,6 +92,7 @@ export default function Index() {
                 id="searchType"
                 hidden
                 value="handleSearch"
+                readOnly
               />
               <div className="flex items-center justify-center">
                 <label
@@ -153,6 +154,7 @@ export default function Index() {
                 id="searchType"
                 hidden
                 value="nameSearch"
+                readOnly
               />
               <div>
                 <input
@@ -241,7 +243,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
       formatName(search.get("first_name")),
       formatName(search.get("last_name"))
     );
-    console.log(players);
+    // console.log(players);
   } else if (search.get("searchType") === "handleSearch") {
     players = await searchPlayersByHandleV2(
       search.get("site"),

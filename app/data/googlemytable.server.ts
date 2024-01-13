@@ -1,5 +1,4 @@
 import { prisma } from "./db.server";
-import { json } from "@remix-run/node";
 import { getXataClient } from "src/xata";
 
 export interface PLAYER {
