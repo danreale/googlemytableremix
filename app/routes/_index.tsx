@@ -221,7 +221,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
   // const players = await getPlayers(search.get("query"));
 
   const playerCount = await getPlayersCountV2();
-  console.log(playerCount);
+  // console.log(playerCount);
 
   let players;
   if (search.get("searchType") === "nameSearch") {

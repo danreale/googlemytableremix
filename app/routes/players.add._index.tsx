@@ -27,7 +27,7 @@ export default function AddPlayer() {
 export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData();
   const playerData = Object.fromEntries(formData);
-  console.log(playerData);
+  // console.log(playerData);
   // if (playerData.first_name.toString().length === 0) {
   //   return "Did not enter a valid First Name";
   // }
@@ -51,7 +51,7 @@ export async function action({ request }: ActionFunctionArgs) {
       site_pala: playerData.site_pala.toString(),
       site_wpt_global: playerData.site_wpt_global.toString(),
     };
-    console.log(`New Player`, newPlayer);
+    // console.log(`New Player`, newPlayer);
 
     // await addPlayer(newPlayer);
     await addPlayerV3(newPlayer);
