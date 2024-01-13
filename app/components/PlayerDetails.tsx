@@ -22,7 +22,7 @@ export default function PlayerDetails({ player }: { player: any }) {
           (site: POKERSITE, index: number) =>
             player[site.id] && (
               <li className="flex justify-center space-x-5" key={index}>
-                <label htmlFor="" className="">
+                <label htmlFor="" className="font-bold">
                   {site.label}
                 </label>
                 <label htmlFor="" className="">

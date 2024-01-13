@@ -75,7 +75,7 @@ export async function updatePlayerV2(id: string, playerData: PLAYER) {
   await getXataClient().db.players.update(id, playerData);
 }
 
-export async function searchPlayersByNameV2(site: string, handle: string) {
+export async function searchPlayersByHandleV2(site: string, handle: string) {
   const playerData = await getXataClient()
     .db.players.filter({
       [site]: handle,
@@ -83,10 +83,27 @@ export async function searchPlayersByNameV2(site: string, handle: string) {
     .getMany();
   return playerData;
 }
-
+export async function searchPlayersByNameV2(
+  first_name: string,
+  last_name: string
+) {
+  const playerData = await getXataClient()
+    .db.players.filter({
+      first_name,
+      last_name,
+    })
+    .getMany();
+  return playerData;
+}
 export async function addPlayerV3(playerData: PLAYER) {
   await getXataClient().db.players.create(playerData);
 }
 export async function updatePlayerV3(id: string, playerData: PLAYER) {
   await getXataClient().db.players.update(id, playerData);
+}
+export async function getPlayersV3() {
+  const players = await getXataClient().db.players.getMany({
+    pagination: { size: 10 },
+  });
+  return players;
 }

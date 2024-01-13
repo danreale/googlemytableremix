@@ -16,16 +16,44 @@ import {
   getPlayersCountV2,
   getPlayersV2,
   searchPlayersByNameV2,
+  searchPlayersByHandleV2,
+  getPlayersV3,
 } from "~/data/googlemytable.server";
 import PlayersList from "~/components/PlayersList";
 import NavigationHeader from "~/components/Header";
 import { POKERSITE, pokerSites } from "~/data/pokerSites";
+import { useState } from "react";
 
 export default function Index() {
   const actionData = useActionData<typeof action>();
   const [params] = useSearchParams();
   const { playerCount, players } = useLoaderData<typeof loader>();
   const playersCountZero = playerCount.aggs.totalCount === 0 ? true : false;
+  const [isOpen, setIsOpen] = useState(true);
+  const [toggleText, setToggleText] = useState("Search By Name");
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const removeQueryParamsName = () => {
+    // 👇️ delete each query param
+    searchParams.delete("first_name");
+    searchParams.delete("last_name");
+    searchParams.delete("searchType");
+    setSearchParams(searchParams);
+  };
+
+  const removeQueryParamsHandle = () => {
+    // 👇️ delete each query param
+    searchParams.delete("searchType");
+    searchParams.delete("site");
+    searchParams.delete("query");
+    // 👇️ update state after
+    setSearchParams(searchParams);
+  };
+
+  function toggle() {
+    setIsOpen((isOpen) => !isOpen);
+    setToggleText(isOpen ? "Search By Handle" : "Search By Name");
+  }
 
   return (
     <main style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }}>
@@ -36,41 +64,123 @@ export default function Index() {
           {playerCount.aggs.totalCount}
         </p>
       </div>
+      <div className="flex justify-center py-5">
+        <button
+          onClick={toggle}
+          className="border-4 border-green-700 rounded-xl px-2"
+        >
+          Switch To {toggleText}
+        </button>
+      </div>
       <div className="flex justify-center items-center text-center pt-2">
         <Form>
-          <div className="flex items-center justify-center">
-            <label
-              htmlFor="site"
-              className="block text-sm font-medium leading-6 text-gray-900"
-            >
-              Choose Site
-            </label>
-          </div>
-          <div className="mt-2 pb-5">
-            <select
-              id="site"
-              name="site"
-              className="border-2 border-green-700 rounded text-center w-80"
-              required
-            >
-              {pokerSites.map((site: POKERSITE, index: number) => {
-                return (
-                  <option key={index} value={site.id}>
-                    {site.label}
-                  </option>
-                );
-              })}
-            </select>
-          </div>
+          {isOpen && (
+            <>
+              <input
+                type="text"
+                name="searchType"
+                id="searchType"
+                hidden
+                value="handleSearch"
+              />
+              <div className="flex items-center justify-center">
+                <label
+                  htmlFor="site"
+                  className="block text-sm font-medium leading-6 text-gray-900"
+                >
+                  Choose Site
+                </label>
+              </div>
+              <div className="mt-2 pb-5">
+                <select
+                  id="site"
+                  name="site"
+                  className="border-2 border-green-700 rounded text-center w-80"
+                  required
+                >
+                  {pokerSites.map((site: POKERSITE, index: number) => {
+                    return (
+                      <option key={index} value={site.id}>
+                        {site.label}
+                      </option>
+                    );
+                  })}
+                </select>
+              </div>
 
-          <input
-            type="text"
-            name="query"
-            placeholder="Search Player Handle"
-            defaultValue={params.get("query") || ""}
-            className="border-4 border-blue-500 rounded"
-            data-testid="handleSearch"
-          />
+              <input
+                type="text"
+                name="query"
+                placeholder="Search Player Handle"
+                defaultValue={params.get("query") || ""}
+                className="border-4 border-blue-500 rounded"
+                data-testid="handleSearch"
+              />
+              <div className="py-5">
+                <button
+                  type="submit"
+                  className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                >
+                  Search
+                </button>
+              </div>
+              <div className="pb-5">
+                <button
+                  type="reset"
+                  className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  onClick={removeQueryParamsHandle}
+                >
+                  Clear
+                </button>
+              </div>
+            </>
+          )}
+          {!isOpen && (
+            <>
+              <input
+                type="text"
+                name="searchType"
+                id="searchType"
+                hidden
+                value="nameSearch"
+              />
+              <div>
+                <input
+                  type="text"
+                  name="first_name"
+                  placeholder="Player First Name"
+                  defaultValue={params.get("first_name") || ""}
+                  className="border-4 border-blue-500 rounded"
+                  data-testid="first_name_search"
+                />
+              </div>
+              <div className="py-5">
+                <input
+                  type="text"
+                  name="last_name"
+                  placeholder="Player Last Name"
+                  defaultValue={params.get("last_name") || ""}
+                  className="border-4 border-blue-500 rounded"
+                  data-testid="last_name_search"
+                />
+              </div>
+              <button
+                type="submit"
+                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >
+                Search
+              </button>
+              <div className="py-5">
+                <button
+                  type="reset"
+                  className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  onClick={removeQueryParamsName}
+                >
+                  Clear
+                </button>
+              </div>
+            </>
+          )}
         </Form>
       </div>
       <div>
@@ -85,7 +195,7 @@ export default function Index() {
           </Link>
         </div>
 
-        {!playersCountZero && <PlayersList players={players} />}
+        {players.length !== 0 && <PlayersList players={players} />}
         {players.length === 0 && (
           <p className="text-2xl text-center py-2 flex justify-center items-center">
             <Link
@@ -114,15 +224,20 @@ export async function loader({ request }: LoaderFunctionArgs) {
   console.log(playerCount);
 
   let players;
-  if (!search.get("query")) {
-    players = await getPlayersV2();
-    console.log(players);
-  } else {
+  if (search.get("searchType") === "nameSearch") {
     players = await searchPlayersByNameV2(
+      search.get("first_name"),
+      search.get("last_name")
+    );
+    console.log(players);
+  } else if (search.get("searchType") === "handleSearch") {
+    players = await searchPlayersByHandleV2(
       search.get("site"),
       search.get("query")
     );
     // console.log("Practice Search", practiceSearch);
+  } else {
+    players = await getPlayersV3();
   }
 
   // const fakeSearch = await searchPlayersByHandleV2(search.get("query"));
